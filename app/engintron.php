@@ -40,7 +40,17 @@ function checkacl()
 define('CPANEL_RELEASE', trim(shell_exec('/usr/local/cpanel/cpanel -V')));
 define('CPANEL_VERSION', (int) CPANEL_RELEASE);
 define('NGINX_VERSION', trim(str_replace('nginx version: nginx/', '', shell_exec('nginx -v 2>&1'))));
-define('OS_RELEASE', trim(shell_exec('rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release)')));
+// define('OS_RELEASE', trim(shell_exec('rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release)')));
+/*
+ * @claudioabreu: patch to make engintron.sh compatible with Ubuntu 20.04 > https://github.com/engintron/engintron/issues/1375
+ * @atifone: fix black terminal in web config editor on ubuntu.
+*/
+if (file_exists('/etc/redhat-release')) { 
+    $os_r = shell_exec('rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release)'); 
+} else { 
+    $os_r = shell_exec('lsb-release -r -s'); 
+}
+define('OS_RELEASE', trim($os_r));
 define('PLG_BUILD', 'Build 20220916');
 define('PLG_NAME_SHORT', 'Engintron');
 define('PLG_NAME', 'Engintron for cPanel/WHM');
