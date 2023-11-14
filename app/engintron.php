@@ -750,7 +750,10 @@ echo str_replace($output_find, $output_replace, $output);
                     el.className = 'category collapsed';
                     if (el.id == 'Plugins') {
                         el.className = 'category expanded';
-                        el.querySelector('#PluginsContent li[searchtext*="Engintron"]').className = 'highlighted activePage';
+                        // @atifone: Fix Cannot set properties of null & Interface Analytics slide out container
+                        if (el.querySelector('#PluginsContent li[searchtext*="Engintron"]')) {
+                            el.querySelector('#PluginsContent li[searchtext*="Engintron"]').className = 'highlighted activePage';
+                        }
                     }
                 });
             }
