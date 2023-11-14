@@ -45,7 +45,7 @@ function install_basics {
         apt -y install ea-apr ea-apr-util bash-completion bc bmon bzip2 curl dmidecode ethtool git htop httpie ifstat iftop iotop iptraf iptraf-ng jpegoptim libwebp6 make multitail mutt nano ncdu net-tools nload nmon libssl-dev optipng libpcre3 libpcre3-dev psmisc rename rsync screen screenfetch siege smartmontools sudo tree unzip wget zip zlib1g zlib1g-dev
         apt install memcached libmemcached-tools libmemcached11 libmemcached-dev
         # Could be dangerous - need to be tested - conflicts with ea-apache24-tools 
-        apt-get -o Dpkg::Options::="--force-overwrite" install apache2-utils
+        #apt-get -o Dpkg::Options::="--force-overwrite" install apache2-utils
     else
         if [ "$RELEASE" -gt "7" ]; then
             dnf -y update
